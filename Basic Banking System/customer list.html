@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>View Customers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;900&family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js" charset="utf-8"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <section id="title">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">
+          <h2 class="navbar-heading">Basic Banking System</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="customer list.html">View Customers</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="about.html">About TSF Bank</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="my-info text-center">
+      <button class="btn btn-outline-light" data-toggle="modal" data-target="#sendMoney">Send Money</button>
+      <a class="btn btn-outline-light" href="history.html" data-toggle="modal" data-target="#transactionHistory">See All Transactions</a>
+    </div>
+
+  </section>
+
+
+  <section id="main" class="coloured-section">
+
+    <div class="modal fade" id="sendMoney" tableindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Send Money</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="input-group mb-3">
+                <input type="text" id="enterSName" class="form-control" placeholder="Sender's Username" aria-label="Sender's Username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" id="enterName" class="form-control" placeholder="Recipient's Username" aria-label="Recipient's Username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">₹</span>
+                </div>
+                <input type="text" id="enterAmount" class="form-control" placeholder="Enter Amount" aria-label="Amount">
+                <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" onclick="sendMoney()" class="btn btn-success" data-dismiss="modal">Send Money</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="transactionHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transaction History</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ol id="transaction-history-body">
+
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Sr. No.</th>
+              <th scope="col">Name</th>
+              <th scope="col">E-Mail ID</th>
+              <th scope="col">Bank Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td scope="row">1</td>
+              <td>Raj Patil</td>
+              <td>raj@gmail.com</td>
+              <td>
+                <p id="rajBankBalance">81200</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">2</td>
+              <td>Manoj mhatre</td>
+              <td>manoj@email.com</td>
+              <td>
+                <p id="manojBankBalance">71000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">3</td>
+              <td>Arnav Desai</td>
+              <td>arnav@gmail.com</td>
+              <td>
+                <p id="arnavBankBalance">42000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">4</td>
+              <td>Mahendra singh</td>
+              <td>mahendra@gmail.com</td>
+              <td>
+                <p id="mahendraBankBalance">87080</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">5</td>
+              <td>Mansi Jain</td>
+              <td>mansi@gmail.com</td>
+              <td>
+                <p id="mansiBankBalance">37500</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">6</td>
+              <td>Kriti Mehra</td>
+              <td>kriti@gmail.com</td>
+              <td>
+                <p id="kritiBankBalance">98055</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">7</td>
+              <td>Jack Sharmaa</td>
+              <td>jack@gmail.com</td>
+              <td>
+                <p id="jackBankBalance">47500</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">8</td>
+              <td>Virat Kohli</td>
+              <td>virat@gmail.com</td>
+              <td>
+                <p id="viratBankBalance">36300</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">9</td>
+              <td>Joseph Dsouza</td>
+              <td>joseph@gmail.com</td>
+              <td>
+                <p id="josephBankBalance">49700</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Samuel Kalan</td>
+              <td>samuel@gmail.com</td>
+              <td>
+                <p id="samuelBankBalance">71080</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Sandip Maurya</td>
+              <td>sandip@gmail.com</td>
+              <td>
+                <p id="sandipBankBalance">75000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Viraj Salunkhe</td>
+              <td>viraj@gmail.com</td>
+              <td>
+                <p id="virajBankBalance">15000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Manish Paul</td>
+              <td>Manish@gmail.com</td>
+              <td>
+                <p id="manishBankBalance">50000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Vinay Thakur</td>
+              <td>vinay@gmail.com</td>
+              <td>
+                <p id="vinayBankBalance">35000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Rupesh Das</td>
+              <td>rupesh@gmail.com</td>
+              <td>
+                <p id="rupeshBankBalance">29000</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td scope="row">10</td>
+              <td>Mandeep Singh</td>
+              <td>mandeep@gmail.com</td>
+              <td>
+                <p id="mandeepBankBalance">8000</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer0">
+          <div id="ft" class="footer1">
+              <a href="">Corporate</a><br><br>
+              <a href="">One to one </a><br><br>
+              <a href="">Consulting</a>
+          </div>
+          <div id="ft" class="footer2">
+              <a href="">Training</a><br><br>
+              <a href="">Loan</a><br><br>
+              <a href="">Consulting</a>
+          </div>
+          <div id="ft" class="footer3">
+              <a href="index.html">Home</a><br><br>
+              <a href="about.html">About</a><br><br>
+              <a href="">Contact</a>
+          </div>
+          <div id="ft" class="input">
+              <input type="text" id="email" name="email" placeholder="Email Address">
+              <input type="submit" id="subscribe" class="subscribe-btn" value="Login">
+          </div>
+      </div>
+      
+      <div class="detail">
+          <p>Mobile: +917057907612<br>
+              Email: rgpatil.rp444@gmail.com
+          </p>
+      </div>
+      <hr class="horizontal-line">
+
+  </div>
+
+  </section>
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"></script>
+</body>
+</html>6
